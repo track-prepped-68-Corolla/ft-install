@@ -248,7 +248,7 @@ install_nix() {
     printf "\n"
   fi
 
-  ft_read REPO_DIR     "Consumer repo location" "${HOME}/nixos-config"
+  ft_read REPO_DIR     "Consumer repo location" "${HOME}/ft-home"
   ft_read MACHINE_NAME "Machine name"           "$(hostname -s 2>/dev/null || echo my-machine)"
   ft_read PRIMARY_USER "Primary username"        "$(id -un)"
 
@@ -284,7 +284,7 @@ install_nix() {
       -e "s|mainUser = \"example\"|mainUser = \"${PRIMARY_USER}\"|g" \
       -e "s|superUsers = \[ \"example\" \]|superUsers = [ \"${PRIMARY_USER}\" ]|g" \
       -e "s|initialPasswords\.example|initialPasswords.${PRIMARY_USER}|g" \
-      -e "s|/home/example/nixos-config|/home/${PRIMARY_USER}/nixos-config|g" \
+      -e "s|/home/example/ft-template|/home/${PRIMARY_USER}/ft-home|g" \
       "${MACH_NIX}"
   fi
 
@@ -297,7 +297,7 @@ install_nix() {
     USER_NIX="${USER_DST}/default.nix"
     sed -i \
       -e "s|home\.username = \"example\"|home.username = \"${PRIMARY_USER}\"|g" \
-      -e "s|/home/example/nixos-config|/home/${PRIMARY_USER}/nixos-config|g" \
+      -e "s|/home/example/ft-template|/home/${PRIMARY_USER}/ft-home|g" \
       -e "s|userName = \"example\"|userName = \"${PRIMARY_USER}\"|g" \
       -e "s|userEmail = \"example@fasttrack\.os\"|userEmail = \"${PRIMARY_USER}@fasttrack.os\"|g" \
       "${USER_NIX}"
